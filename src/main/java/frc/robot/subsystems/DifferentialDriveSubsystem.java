@@ -12,50 +12,35 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DrivetrainConstants;
+import org.littletonrobotics.junction.AutoLogOutput;
+import org.littletonrobotics.junction.Logger;
 
 
 public class DifferentialDriveSubsystem extends SubsystemBase {
-  // motors
-  private final WPI_VictorSPX frontLeft;
-  private final WPI_VictorSPX frontRight;
-  private final WPI_VictorSPX backLeft;
-  private final WPI_VictorSPX backRight;
+  private final DriveIO io;
+  private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
+  private double leftSpeed;
+  private double rightSpeed;
 
-  private final MotorControllerGroup leftDrive;
-  private final MotorControllerGroup rightDrive;
 
-  private final DifferentialDrive drive;
-
-  private double forward;
-  private double rotation;
-
-  public DifferentialDriveSubsystem() {
-    frontLeft = new WPI_VictorSPX(DrivetrainConstants.frontLeftId);
-    frontRight = new WPI_VictorSPX(DrivetrainConstants.frontRightId);
-    backLeft = new WPI_VictorSPX(DrivetrainConstants.backLeftId);
-    backRight = new WPI_VictorSPX(DrivetrainConstants.backRightId);
-    
-    leftDrive = new MotorControllerGroup(frontLeft, backLeft);
-    rightDrive = new MotorControllerGroup(frontRight, backRight);
-
-    drive = new DifferentialDrive(leftDrive, rightDrive);
-
-    forward = 0;
-    rotation = 0;
+  public DifferentialDriveSubsystem(DriveIO io) {
+    this.io = io;
+    leftSpeed = 0.0;
+    rightSpeed = 0.0;
   }
   public void arcadeDrive(double forwardInput, double rotationInput) {
-    forward = forwardInput;
-    rotation = rotationInput;
+    var speeds = DifferentialDrive.arcadeDriveIK(forwardInput, rotationInput, true);
+    leftSpeed = speeds.left;
+    rightSpeed = speeds.right;
+  }
+  public void stop() {
+    leftSpeed = 0.0;
+    rightSpeed = 0.0;
   }
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("forward output", forward);
-    SmartDashboard.putNumber("Rotation output", rotation);
-    drive.arcadeDrive(forward, rotation);
-  }
-
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+    io.updateInputs(inputs);
+    Logger.processInputs("Drive", inputs);
+    io.setVoltage(leftSpeed * 12.0, rightSpeed * 12.0);
   }
 }
