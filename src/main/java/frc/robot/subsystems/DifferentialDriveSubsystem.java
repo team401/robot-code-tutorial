@@ -46,12 +46,12 @@ public class DifferentialDriveSubsystem extends SubsystemBase {
   public void arcadeDrive(double forwardInput, double rotationInput) {
     forward = forwardInput;
     rotation = rotationInput;
-    drive.arcadeDrive(forwardInput, rotationInput);
   }
   @Override
   public void periodic() {
     SmartDashboard.putNumber("forward output", forward);
     SmartDashboard.putNumber("Rotation output", rotation);
+    drive.arcadeDrive(forward, rotation);
   }
 
   @Override

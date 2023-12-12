@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 /** An example command that uses an example subsystem. */
 public class ArcadeDrive extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DifferentialDriveSubsystem m_drive;
+  private final DifferentialDriveSubsystem drive;
 
   private final DoubleSupplier forwardInput;
   private final DoubleSupplier rotationInput;
@@ -24,7 +24,7 @@ public class ArcadeDrive extends Command {
    * @param subsystem The subsystem used by this command.
    */
   public ArcadeDrive(DifferentialDriveSubsystem subsystem, DoubleSupplier xDrive, DoubleSupplier zRotation) {
-    m_drive = subsystem;
+    drive = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
     forwardInput = xDrive;
@@ -38,7 +38,7 @@ public class ArcadeDrive extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drive.arcadeDrive(forwardInput.getAsDouble(), rotationInput.getAsDouble());
+    drive.arcadeDrive(forwardInput.getAsDouble(), rotationInput.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
