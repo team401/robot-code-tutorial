@@ -6,10 +6,29 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import frc.robot.Constants.DrivetrainConstants;
 
-public class ExampleSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+
+public class DifferentialDriveSubsystem extends SubsystemBase {
+  // motors
+  private final WPI_VictorSPX frontLeft;
+  private final WPI_VictorSPX frontRight;
+  private final WPI_VictorSPX backLeft;
+  private final WPI_VictorSPX backRight;
+
+  private final DifferentialDrive drive;
+
+  public DifferentialDriveSubsystem() {
+    frontLeft = new WPI_VictorSPX(DrivetrainConstants.frontLeftId);
+    frontRight = new WPI_VictorSPX(DrivetrainConstants.frontRightId);
+    backLeft = new WPI_VictorSPX(DrivetrainConstants.backLeftId);
+    backRight = new WPI_VictorSPX(DrivetrainConstants.backRightId);
+
+    drive = new DifferentialDrive(new MotorControllerGroup(frontLeft, backLeft), new MotorControllerGroup(frontRight, backRight));
+  }
 
   /**
    * Example command factory method.
