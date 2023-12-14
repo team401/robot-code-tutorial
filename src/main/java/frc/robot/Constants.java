@@ -18,11 +18,13 @@ public final class Constants {
   }
   public class {
     // Unsure of actual motor assignments
+    
     public static  int WristID = 5;
     public static  int leftID = 6;
     public static  int rightID = 7;
     public static  int topID = 8;
     //Taken from Nickleback 23
+    
     public static  double intakePos = -35;
     public static final double upShootPos = -3;
     public static final double stowShootPos = 0;
