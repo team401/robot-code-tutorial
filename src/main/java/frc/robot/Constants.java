@@ -25,7 +25,7 @@ public final class Constants {
     public static  int topID = 8;
     //Taken from Nickleback 23
     
-    public static  double intakePos = -35;
+    public static final double intakePos = -35;
     public static final double upShootPos = -3;
     public static final double stowShootPos = 0;
     public static final double lowShootVolt = -0.1;
