@@ -6,8 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.ArcadeDrive;
-import frc.robot.subsystems.DriveIOVictorSPX;
-import frc.robot.subsystems.DifferentialDriveSubsystem;
+import frc.robot.subsystems.drive.DriveIOVictorSPX;
+import frc.robot.subsystems.drive.DifferentialDriveSubsystem;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 public class RobotContainer {
