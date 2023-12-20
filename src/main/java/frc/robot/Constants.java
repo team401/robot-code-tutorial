@@ -16,6 +16,29 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+  public class {
+    // Unsure of actual motor assignments
+    
+    public static  int WristID = 5;
+    public static  int leftID = 6;
+    public static  int rightID = 7;
+    public static  int topID = 8;
+    //Taken from Nickleback 23
+    
+    public static final double intakePos = -35;
+    public static final double upShootPos = -3;
+    public static final double stowShootPos = 0;
+    public static final double lowShootVolt = -0.1;
+    public static final double midShootVolt = -0.2;
+    public static final double highShootVolt = -0.75;
+    public static final double intakeVolt = 0.2;
+    public static final double spitVolt = 0.5;
+    
+    public static final double topShootPow = 0.5;
+    public static final double topIntakePow = -0.75;
+  
+  }
+  
   public static class DrivetrainConstants {
     public static final int frontLeftId = 1;
     public static final int frontRightId = 2;
