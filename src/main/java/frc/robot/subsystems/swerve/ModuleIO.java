@@ -8,7 +8,7 @@ public interface ModuleIO {
     @AutoLog
     public static class ModuleIOInputs {
         // rotation inputs
-        public double rotationVoltage = 0.0;
+        public double turnVoltage = 0.0;
         public Rotation2d turnAbsolutePosition = new Rotation2d();
         public Rotation2d turnPosition = new Rotation2d();
         public double turnVelRadiansPerSec = 0.0;

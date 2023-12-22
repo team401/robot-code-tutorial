@@ -77,6 +77,7 @@ public final class Constants {
 		public static final double autoDrivePercent = 0.6;
         public static final double driveWheelGearReduction = 6.12; // placeholder
         public static final double wheelRadiusM = Units.inchesToMeters(2);
+    public static final double turnGearReduction = 1.0; // placeholder
 
         public static final SwerveDriveKinematics kinematics = 
             new SwerveDriveKinematics(
