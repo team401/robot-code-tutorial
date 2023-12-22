@@ -69,6 +69,8 @@ public final class Constants {
         public static final int backRightRotationEncoderID = 3;
         public static final int backLeftRotationEncoderID = 4; 
 
+        public static final int PigeonIMUID = 7; // placeholder
+
         public static final double frontLeftAngleOffset = -2.3930100291016;
         public static final double frontRightAngleOffset = 2.560213934981135; 
         public static final double backRightAngleOffset = 2.389942067525829;
