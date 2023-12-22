@@ -57,6 +57,17 @@ public class ModuleIOSparkMax implements ModuleIO {
         inputs.turnVelRadiansPerSec = Units.rotationsPerMinuteToRadiansPerSecond(turnRelativeEncoder.getVelocity()) / SwerveDriveConstants.turnGearReduction;
         inputs.turnVoltage = turnMotor.getAppliedOutput() * turnMotor.getBusVoltage();
         inputs.turnCurrentAmps = new double[] {turnMotor.getOutputCurrent()};
-
+    }
+    public void setDriveVoltage(double voltage) {
+        driveMotor.setVoltage(voltage);
+    }
+    public void setTurnVoltage(double voltage) {
+        turnMotor.setVoltage(voltage);
+    }
+    public void setDriveBrakeMode(boolean brake) {
+        driveMotor.setIdleMode(brake ? IdleMode.kBrake : IdleMode.kCoast);
+    }
+    public void setTurnBrakeMode(boolean brake) {
+        turnMotor.setIdleMode(brake ? IdleMode.kBrake : IdleMode.kCoast);
     }
 }
