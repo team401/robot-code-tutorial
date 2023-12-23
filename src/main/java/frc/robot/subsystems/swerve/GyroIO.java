@@ -13,4 +13,12 @@ public interface GyroIO {
     }
 
     public default void updateInputs(GyroIOInputs inputs) {}
+
+    public default void resetYawOffset () {};
+
+    public default void resetPitchOffset () {};
+    
+    public default void resetRollOffset () {};
+
+    public default void setYaw (double yawRad) {};
 }
