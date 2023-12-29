@@ -23,25 +23,49 @@ public class ModuleIOSparkMax implements ModuleIO {
     private final double encoderOffsetRadians;
 
 
-    public ModuleIOSparkMax (int driveId, int turnId, int turnEncoderId, double offsetRadians, boolean driveReversed, boolean turnReversed) {
+    public ModuleIOSparkMax (int index, boolean driveReversed, boolean turnReversed) {
+        switch (index) {
+            case 0:
+                driveMotor = new CANSparkMax(SwerveDriveConstants.frontLeftDriveID, MotorType.kBrushless);
+                turnMotor = new CANSparkMax(SwerveDriveConstants.frontLeftRotationMotorID, MotorType.kBrushless);
+                turnAbsoluteEncoder = new CANcoder(SwerveDriveConstants.frontLeftRotationEncoderID);
+                encoderOffsetRadians = SwerveDriveConstants.frontLeftAngleOffset;
+                break;
+            case 1:
+                driveMotor = new CANSparkMax(SwerveDriveConstants.frontRightDriveID, MotorType.kBrushless);
+                turnMotor = new CANSparkMax(SwerveDriveConstants.frontRightRotationMotorID, MotorType.kBrushless);
+                turnAbsoluteEncoder = new CANcoder(SwerveDriveConstants.frontRightRotationEncoderID); 
+                encoderOffsetRadians = SwerveDriveConstants.frontRightAngleOffset;
+                break;
+            case 2:
+                driveMotor = new CANSparkMax(SwerveDriveConstants.backLeftDriveID, MotorType.kBrushless);
+                turnMotor = new CANSparkMax(SwerveDriveConstants.backLeftRotationMotorID, MotorType.kBrushless);
+                turnAbsoluteEncoder = new CANcoder(SwerveDriveConstants.backLeftRotationEncoderID);
+                encoderOffsetRadians = SwerveDriveConstants.backLeftAngleOffset;
+                break;
+            case 3:
+                driveMotor = new CANSparkMax(SwerveDriveConstants.backRightDriveID, MotorType.kBrushless);
+                turnMotor = new CANSparkMax(SwerveDriveConstants.backRightRotationMotorID, MotorType.kBrushless);
+                turnAbsoluteEncoder = new CANcoder(SwerveDriveConstants.backRightRotationEncoderID);
+                encoderOffsetRadians = SwerveDriveConstants.backRightAngleOffset;
+                break;
+            default:
+                throw new RuntimeException("Invalid module index");
+        }
+
         // init drive motor
-        driveMotor = new CANSparkMax(driveId, MotorType.kBrushless);
         driveMotor.setIdleMode(IdleMode.kCoast);
         driveMotor.setInverted(driveReversed);
         driveMotor.setSmartCurrentLimit(70, 80, 1);
 
         // init turn motor
-        turnMotor = new CANSparkMax(turnId, MotorType.kBrushless);
         turnMotor.setIdleMode(IdleMode.kCoast);
         turnMotor.setInverted(turnReversed);
         turnMotor.setSmartCurrentLimit(70, 80, 1);
 
         // init encoders
-        turnAbsoluteEncoder = new CANcoder(turnEncoderId);
         turnRelativeEncoder = turnMotor.getEncoder();
         driveEncoder = driveMotor.getEncoder();
-
-        encoderOffsetRadians = offsetRadians;
     }
 
     public void updateInputs (ModuleIOInputs inputs) {
